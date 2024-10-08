@@ -4,6 +4,7 @@ import pygame, random
 pygame.mixer.pre_init(44100,-16,2,512) 
 pygame.init() 
 
+GRAVITY = 0.5
 
 def load_sliced_sprites(w, h, filename):
      #returns a list of image frames sliced from file
@@ -44,7 +45,7 @@ class eggClass(pygame.sprite.Sprite):
           
      def move(self):
           #gravity
-          self.yspeed += 0.4
+          self.yspeed += GRAVITY
           if self.yspeed > 10:
                self.yspeed = 10
           self.y += self.yspeed
@@ -164,7 +165,7 @@ class enemyClass(pygame.sprite.Sprite):
                          self.x = self.x + self.xspeed
                          self.y = self.y + self.yspeed
                          if not self.walking:
-                                   self.yspeed += 0.4
+                                   self.yspeed += GRAVITY
                          if self.yspeed > 10:        
                                    self.yspeed = 10  
                          if self.yspeed < -10:       
@@ -292,10 +293,10 @@ class playerClass(pygame.sprite.Sprite):
                     else:
                          if keys[pygame.K_LEFT]:
                               if self.xspeed >-10:
-                                   self.xspeed -=0.5
+                                   self.xspeed -=0.7
                          elif keys[pygame.K_RIGHT]:
                               if self.xspeed <10:
-                                   self.xspeed +=0.5
+                                   self.xspeed +=0.7
                          if keys[pygame.K_SPACE]:
                               if self.flap == False:
                                    self.playerChannel.stop()
@@ -308,7 +309,7 @@ class playerClass(pygame.sprite.Sprite):
                          self.x = self.x + self.xspeed
                          self.y = self.y + self.yspeed
                          if not self.walking:
-                              self.yspeed += 0.4
+                              self.yspeed += GRAVITY
                          if self.yspeed > 10:
                               self.yspeed = 10
                          if self.yspeed < -10:
